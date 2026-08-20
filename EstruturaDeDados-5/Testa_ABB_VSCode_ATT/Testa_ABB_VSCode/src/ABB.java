@@ -1,0 +1,161 @@
+// Classe ABB para demonstrar a inserção e o atravessamento em-ordem 
+// em uma Árvore Binária de Busca (ABB)
+// Ledón, 2026.
+
+import java.util.LinkedList;
+
+class ABB <E extends Comparable<E>> {  // Árvore Binária de Busca 
+
+    private Node raiz;
+
+    public ABB() {
+        raiz = null; // a ABB criada estará inicialmente vazia
+    }
+
+    public boolean isEmpty() {
+        return (raiz == null);
+    }
+
+    public E inserir(E valor) {
+        try {
+            Node novo = new Node(valor);
+            this.inserir(novo, raiz);
+        }
+        catch (Exception exMemoria) { return null; }   // memória insuficiente
+        return (valor);
+    }  
+
+    /*
+      Os métodos 'inserir' e 'add' utilizam o método 'compareTo', que deverá existir na classe de objetos a inserir na ABB.
+      O método 'compareTo' da interface Comparable (implementado nas classes Double, Integer, String etc.) lançará 
+      uma exception se são comparados objetos de tipos diferentes.
+      Consequentemente, este método 'inserir' só conseguirá adicionar novos nodos que guardem objetos do mesmo tipo
+      que o objeto inicial guardado na ABB, ou seja, a ABB guardará objetos do mesmo tipo.
+    */    
+    private Node inserir(Node novo, Node anterior) {
+        if (raiz == null) {
+            raiz = novo;
+            return raiz;
+        }
+        if (anterior != null) {
+            if (novo.getValue().compareTo(anterior.getValue()) < 0)
+                anterior.setFilhoEsquerdo(inserir(novo, anterior.getFilhoEsquerdo()));
+                else anterior.setFilhoDireito(inserir(novo, anterior.getFilhoDireito()));
+        }
+        else {
+            anterior = novo;
+        }        
+        return anterior;
+    }
+
+    // versão mais detalhada:
+    
+    public E add(E valor) {
+        try {
+            Node novo = new Node(valor);
+            this.add(novo, raiz);
+        }
+        catch (Exception erroMemoria) { return null; }   // memória insuficiente
+        return (valor);
+    }  
+
+    private Node add(Node novo, Node anterior) {
+        if (raiz == null) {
+            raiz = novo; return raiz;
+        }
+        if (anterior != null) {
+            if (novo.getValue().compareTo(anterior.getValue()) < 0) { 
+                // inserir o novo objeto na sub-árvore esquerda
+                Node esquerdo = anterior.getFilhoEsquerdo();
+                Node proximo = add(novo, esquerdo);
+                anterior.setFilhoEsquerdo(proximo);
+            } else {
+                // inserir o novo objeto na sub-árvore direita
+                Node direito = anterior.getFilhoDireito();
+                Node proximo = add(novo, direito);
+                anterior.setFilhoDireito(proximo);
+            }
+        } 
+        else anterior = novo;
+        return anterior;
+    }
+
+
+    public void emOrdem() {
+        emOrdem(raiz);
+    }
+
+    public void emOrdem2() {
+        emOrdem2(raiz);
+    }
+
+    public void emOrdem(Node no) { // mostra os objetos separados por espaços
+        if (no != null) {
+            emOrdem(no.getFilhoEsquerdo());
+            System.out.print(no.getValue() + "   ");
+            emOrdem(no.getFilhoDireito());
+        }
+    }    
+
+    public void emOrdem2(Node no) { // mostra os objetos separados por linhas
+        if (no != null) {
+            emOrdem2(no.getFilhoEsquerdo());
+            System.out.print(no.getValue() + "\n");
+            emOrdem2(no.getFilhoDireito());
+        }
+    }    
+    //CMCCCCC
+    //MÉTODO PÚBLICO QUE INICIA O ATRAVESSAMENTO PRÉ-ORDEM A PARTIR DA RAIZ
+    public void preOrdem() {
+        preOrdem(raiz);
+    }
+
+    //VISITA O NÓ ANTES DE VISITAR AS SUBÁRVORES ESQUERDA E DIREITA (RAIZ, ESQUERDA, DIREITA)
+    public void preOrdem(Node no) {
+        if (no != null) {
+            //IMPRIME O NÓ ATUAL ANTES DE DESCER PARA OS FILHOS
+            System.out.print(no.getValue() + "   ");
+            preOrdem(no.getFilhoEsquerdo());
+            preOrdem(no.getFilhoDireito());
+        }
+    }
+
+    //MÉTODO PÚBLICO QUE INICIA O ATRAVESSAMENTO PÓS-ORDEM A PARTIR DA RAIZ
+    public void posOrdem() {
+        posOrdem(raiz);
+    }
+
+    //VISITA O NÓ SOMENTE DEPOIS DE VISITAR AS SUBÁRVORES ESQUERDA E DIREITA (ESQUERDA, DIREITA, RAIZ)
+    public void posOrdem(Node no) {
+        if (no != null) {
+            posOrdem(no.getFilhoEsquerdo());
+            posOrdem(no.getFilhoDireito());
+            //IMPRIME O NÓ ATUAL SOMENTE APÓS VISITAR AS DUAS SUBÁRVORES
+            System.out.print(no.getValue() + "   ");
+        }
+    }
+
+    //MÉTODO PÚBLICO QUE PERCORRE A ÁRVORE NÍVEL A NÍVEL, USANDO UMA FILA AUXILIAR (LINKEDLIST)
+    public void emNivel() {
+        //SE A ÁRVORE ESTIVER VAZIA, NÃO HÁ NADA A PERCORRER
+        if (!isEmpty()) {
+            Node noAux;
+            //CRIA A FILA AUXILIAR QUE CONTROLA A ORDEM DE VISITA NÍVEL A NÍVEL
+            LinkedList fila = new LinkedList();
+            //COLOCA A RAIZ COMO PRIMEIRO ELEMENTO DA FILA
+            fila.addLast(raiz);
+            //ENQUANTO HOUVER NÓS NA FILA, O PERCURSO CONTINUA
+            while (!fila.isEmpty()) {
+                //RETIRA O PRIMEIRO NÓ DA FILA PARA VISITAR
+                noAux = (Node) fila.removeFirst();
+                //SE EXISTIR FILHO ESQUERDO, ENFILEIRA PARA SER VISITADO NO PRÓXIMO NÍVEL
+                if (noAux.getFilhoEsquerdo() != null) fila.addLast(noAux.getFilhoEsquerdo());
+                //SE EXISTIR FILHO DIREITO, ENFILEIRA PARA SER VISITADO NO PRÓXIMO NÍVEL
+                if (noAux.getFilhoDireito() != null) fila.addLast(noAux.getFilhoDireito());
+                //IMPRIME O NÓ QUE ACABOU DE SAIR DA FILA
+                System.out.print(noAux.getValue() + "   ");
+            }
+        }
+    }
+
+}
