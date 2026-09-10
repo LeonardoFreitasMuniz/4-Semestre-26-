@@ -11,7 +11,7 @@ private NoAVL rotacaoDD(NoAVL A) {
     NoAVL B = A.getEsq();
     rotacaoSE(B); // Primeiro rotaciona para a esquerda 
     return (rotacaoSD(A)); // E depois para a direita, sendo uma rotação dupla para a direita
-}
+}```
 
 ##RDE = Rotação dupla pra Esquerda
 ###Primeira rotacao para a esquerda é com B e para a direita, é com A
