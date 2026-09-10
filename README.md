@@ -4,9 +4,9 @@
 
 ## Estruturas De Dados || (Quinta)
 
-**RDD = Rotação dupla pra Direita**
+### RDD = Rotação dupla pra Direita
 
-### Primeira rotação para a esquerda é com B e para a direita é com A
+**Primeira rotação para a esquerda é com B e para a direita é com A**
 
 ```java
 private NoAVL rotacaoDD(NoAVL A) {
@@ -16,9 +16,9 @@ private NoAVL rotacaoDD(NoAVL A) {
 }
 ```
 
-**RDE = Rotação dupla pra Esquerda**
+### RDE = Rotação dupla pra Esquerda
 
-### Primeira rotação para a direita é com B e para a esquerda é com A
+**Primeira rotação para a direita é com B e para a esquerda é com A**
 
 ```java
 private NoAVL rotacaoDE(NoAVL A) {
