@@ -4,12 +4,14 @@
 
 ## Estruturas De Dados || (Quinta)
 
-###DD = Rotação dupla pra Direita
-private NoAVL rotacaoDD(NoAVL A){
-	NoAVL B = A.getEsq();
-	rotacaoSE(B); //Primeiro rotou para esquerda 
-	return ( rotacaoSD(A) ); // e depois para a direita, sendo assim sendo uma rotação dupla para direita
+**DD = Rotação dupla pra Direita**
+
+```java
+private NoAVL rotacaoDD(NoAVL A) {
+    NoAVL B = A.getEsq();
+    rotacaoSE(B); // Primeiro rotaciona para a esquerda 
+    return (rotacaoSD(A)); // E depois para a direita, sendo uma rotação dupla para a direita
 }
 
 ##RDE = Rotação dupla pra Esquerda
-Primeira rotacao para a esquerda é com B e para a direita, é com A
+###Primeira rotacao para a esquerda é com B e para a direita, é com A
