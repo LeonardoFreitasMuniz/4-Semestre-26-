@@ -30,8 +30,8 @@ private NoAVL rotacaoDE(NoAVL A) {
 
 ## Redes de Computadores
 
-**Mask Padrão Classe A: 255.255.255.0 --> /8**
+**Mask Padrão Classe A: 255.255.255.0 --> CIDR /8**
 
-**Mask Padrão Classe B: 255.255.0.0 --> /16**
+**Mask Padrão Classe B: 255.255.0.0 --> CIDR /16**
 
-**Mask Padrão Classe C: 255.0.0.0 --> /24**
+**Mask Padrão Classe C: 255.0.0.0 --> CIDR /24**
