@@ -35,3 +35,5 @@ private NoAVL rotacaoDE(NoAVL A) {
 **Mask Padrão Classe B: 255.255.0.0 --> CIDR /16**
 
 **Mask Padrão Classe C: 255.0.0.0 --> CIDR /24**
+
+*1.Sub/26 (0 - 63) - de 1 a 62*
